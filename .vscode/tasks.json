@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Task Tracker: 构建 iOS 模拟器版",
+      "type": "shell",
+      "command": "${workspaceFolder}/Scripts/dev.sh",
+      "args": ["build"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Task Tracker: 运行 iOS 模拟器版",
+      "type": "shell",
+      "command": "${workspaceFolder}/Scripts/dev.sh",
+      "args": ["run"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Task Tracker: 运行测试",
+      "type": "shell",
+      "command": "${workspaceFolder}/Scripts/dev.sh",
+      "args": ["test"],
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    }
+  ]
+}
