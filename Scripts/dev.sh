@@ -62,7 +62,8 @@ case "$action" in
     open -a Simulator
     build_simulator
     xcrun simctl install "$simulator_id" "$app_path"
-    xcrun simctl launch --terminate-running-process "$simulator_id" com.local.TaskTracker
+    bundle_identifier="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app_path/Info.plist")"
+    xcrun simctl launch --terminate-running-process "$simulator_id" "$bundle_identifier"
     printf '已在 iPhone 模拟器启动 Task Tracker。\n'
     ;;
   *)

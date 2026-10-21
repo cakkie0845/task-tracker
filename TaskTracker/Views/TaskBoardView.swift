@@ -11,7 +11,7 @@ struct TaskBoardView: View {
             List {
                 taskSection(
                     title: "长期任务",
-                    subtitle: "持续保留，直到你主动删除",
+                    subtitle: "完成后可归档到 Task Bank",
                     symbol: "infinity",
                     tint: .indigo,
                     tasks: store.longTermTasks,
@@ -20,7 +20,7 @@ struct TaskBoardView: View {
 
                 taskSection(
                     title: "每日任务",
-                    subtitle: "今天结束后自动归档",
+                    subtitle: "跨日后按规则归档或返回长期区",
                     symbol: "sun.max.fill",
                     tint: .orange,
                     tasks: store.dailyTasks,
@@ -106,10 +106,15 @@ struct TaskBoardView: View {
                 .buttonStyle(.plain)
             } else {
                 ForEach(tasks) { task in
-                    TaskCardView(task: task)
-                        .onTapGesture {
+                    TaskCardView(
+                        task: task,
+                        onOpen: {
                             editorContext = EditorContext(task: task, defaultArea: task.area)
+                        },
+                        onToggleState: {
+                            store.toggleState(task)
                         }
+                    )
                         .swipeActions(edge: .trailing) {
                             Button(role: .destructive) {
                                 taskPendingDeletion = task
@@ -136,6 +141,19 @@ struct TaskBoardView: View {
                             .tint(.indigo)
                         }
                         .contextMenu {
+                            Button {
+                                store.moveTask(
+                                    task,
+                                    to: task.area == .longTerm ? .daily : .longTerm
+                                )
+                            } label: {
+                                Label(
+                                    task.area == .longTerm ? "移动到每日任务" : "移动到长期任务",
+                                    systemImage: task.area == .longTerm
+                                        ? "sun.max.fill"
+                                        : "infinity"
+                                )
+                            }
                             Button {
                                 store.togglePin(task)
                             } label: {
@@ -174,6 +192,20 @@ struct TaskBoardView: View {
                 Text("\(tasks.count)")
                     .font(.caption.monospacedDigit().weight(.semibold))
                     .foregroundStyle(.secondary)
+                if area == .longTerm {
+                    let accomplishedCount = tasks.filter { $0.state == .accomplished }.count
+                    Button {
+                        store.archiveAccomplishedLongTermTasks()
+                    } label: {
+                        Image(systemName: "archivebox.fill")
+                            .font(.title3)
+                            .foregroundStyle(accomplishedCount == 0 ? Color.secondary : tint)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(accomplishedCount == 0)
+                    .accessibilityLabel("归档已完成的长期任务")
+                    .accessibilityValue("\(accomplishedCount) 个可归档")
+                }
                 Button {
                     editorContext = EditorContext(task: nil, defaultArea: area)
                 } label: {

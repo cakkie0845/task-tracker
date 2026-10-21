@@ -38,6 +38,27 @@ enum TaskStoreSmokeTests {
         try expect(store.longTermTasks.count == 1, "跨日后长期任务没有保留")
         try expect(store.archivedDays.first?.tasks.first?.title == "每日任务", "每日任务没有归档")
 
+        let completedLongTerm = try requireTask(store.longTermTasks.first)
+        store.toggleState(completedLongTerm, now: nextDay)
+        store.archiveAccomplishedLongTermTasks(now: nextDay)
+        try expect(store.longTermTasks.isEmpty, "完成的长期任务没有离开活动区")
+        try expect(store.archivedLongTermTasks.first?.title == "长期任务", "完成的长期任务没有归档")
+
+        store.addTask(title: "移动后完成", description: "", importance: .high, urgency: .urgent, area: .longTerm, now: nextDay)
+        store.addTask(title: "移动后未完成", description: "", importance: .medium, urgency: .relaxed, area: .longTerm, now: nextDay)
+        let movedCompleted = try requireTask(store.longTermTasks.first { $0.title == "移动后完成" })
+        let movedUncompleted = try requireTask(store.longTermTasks.first { $0.title == "移动后未完成" })
+        store.toggleState(movedCompleted, now: nextDay)
+        store.moveTask(movedCompleted, to: .daily, now: nextDay)
+        store.moveTask(movedUncompleted, to: .daily, now: nextDay)
+        let followingDay = try requireDate(calendar.date(byAdding: .day, value: 1, to: nextDay))
+        store.refreshDailyTasksIfNeeded(now: followingDay)
+        try expect(store.longTermTasks.first?.title == "移动后未完成", "未完成的转入任务没有返回长期区")
+        try expect(
+            store.archivedDays.flatMap(\.tasks).contains { $0.title == "移动后完成" },
+            "已完成的转入任务没有归档到每日任务"
+        )
+
         let csv = store.csv(in: .day(firstDay))
         try expect(csv.contains("每日任务"), "CSV 没有包含归档任务")
         try expect(csv.contains("高度重要"), "CSV 没有包含任务属性")
@@ -45,8 +66,9 @@ enum TaskStoreSmokeTests {
         store.deleteArchive(.month(year: 2026, month: 10))
         try expect(store.archivedDays.isEmpty, "月份范围删除失败")
 
-        let reloadedStore = TaskStore(storageURL: storageURL, now: nextDay, calendar: calendar)
+        let reloadedStore = TaskStore(storageURL: storageURL, now: followingDay, calendar: calendar)
         try expect(reloadedStore.longTermTasks.count == 1, "本地持久化后长期任务丢失")
+        try expect(reloadedStore.archivedLongTermTasks.count == 1, "长期任务归档没有持久化")
 
         print("TaskStore smoke tests passed")
     }
@@ -54,6 +76,11 @@ enum TaskStoreSmokeTests {
     private static func requireDate(_ date: Date?) throws -> Date {
         guard let date else { throw SmokeTestError("无法创建测试日期") }
         return date
+    }
+
+    private static func requireTask(_ task: TaskItem?) throws -> TaskItem {
+        guard let task else { throw SmokeTestError("无法找到测试任务") }
+        return task
     }
 
     private static func expect(_ condition: @autoclosure () -> Bool, _ message: String) throws {
