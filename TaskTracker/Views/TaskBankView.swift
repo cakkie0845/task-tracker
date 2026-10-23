@@ -119,7 +119,7 @@ struct TaskBankView: View {
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Task Bank")
+            .navigationTitle("TaskBank")
             .onAppear {
                 if !didInitializeExpansion {
                     expandMostRecentArchive()

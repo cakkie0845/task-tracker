@@ -63,8 +63,8 @@ struct TaskEditorView: View {
                 } footer: {
                     Text(
                         area == .daily
-                            ? "每日任务跨日后进入 Task Bank；从长期区移来的未完成任务会返回长期区。"
-                            : "长期任务会一直保留；完成后可在任务页归档到 Task Bank。"
+                            ? "每日任务跨日后进入 TaskBank；从长期区移来的未完成任务会返回长期区。"
+                            : "长期任务会一直保留；完成后可在任务页归档到 TaskBank。"
                     )
                 }
 

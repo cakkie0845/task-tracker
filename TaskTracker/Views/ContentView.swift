@@ -5,12 +5,17 @@ struct ContentView: View {
         TabView {
             TaskBoardView()
                 .tabItem {
-                    Label("任务", systemImage: "checklist")
+                    Label("Task", systemImage: "checklist")
+                }
+
+            WatchLaterView()
+                .tabItem {
+                    Label("BookMark", systemImage: "bookmark")
                 }
 
             TaskBankView()
                 .tabItem {
-                    Label("Task Bank", systemImage: "archivebox")
+                    Label("TaskBank", systemImage: "archivebox")
                 }
         }
         .tint(AppTheme.accent)

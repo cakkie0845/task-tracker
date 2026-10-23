@@ -11,7 +11,7 @@ struct TaskBoardView: View {
             List {
                 taskSection(
                     title: "长期任务",
-                    subtitle: "完成后可归档到 Task Bank",
+                    subtitle: "完成后可归档到 TaskBank",
                     symbol: "infinity",
                     tint: .indigo,
                     tasks: store.longTermTasks,
@@ -29,7 +29,7 @@ struct TaskBoardView: View {
             }
             .listStyle(.insetGrouped)
             .scrollIndicators(.visible)
-            .navigationTitle("Task Tracker")
+            .navigationTitle("Task")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

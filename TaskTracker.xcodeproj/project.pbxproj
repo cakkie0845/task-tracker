@@ -20,6 +20,12 @@
 		A0000000000000000000000B /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000B /* TaskCardView.swift */; };
 		A0000000000000000000000C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000C /* Assets.xcassets */; };
 		A0000000000000000000000D /* TaskStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* TaskStoreTests.swift */; };
+		A00000000000000000000010 /* WatchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000010 /* WatchItem.swift */; };
+		A00000000000000000000011 /* WatchLaterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000011 /* WatchLaterStore.swift */; };
+		A00000000000000000000012 /* BangumiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* BangumiClient.swift */; };
+		A00000000000000000000013 /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000013 /* WatchLaterView.swift */; };
+		A00000000000000000000014 /* WatchSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000014 /* WatchSearchView.swift */; };
+		A00000000000000000000015 /* WatchLaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000015 /* WatchLaterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,12 @@
 		B0000000000000000000000D /* TaskStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStoreTests.swift; sourceTree = "<group>"; };
 		B0000000000000000000000E /* TaskTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0000000000000000000000F /* TaskTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000010 /* WatchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchItem.swift; sourceTree = "<group>"; };
+		B00000000000000000000011 /* WatchLaterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterStore.swift; sourceTree = "<group>"; };
+		B00000000000000000000012 /* BangumiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiClient.swift; sourceTree = "<group>"; };
+		B00000000000000000000013 /* WatchLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterView.swift; sourceTree = "<group>"; };
+		B00000000000000000000014 /* WatchSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSearchView.swift; sourceTree = "<group>"; };
+		B00000000000000000000015 /* WatchLaterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +106,7 @@
 			children = (
 				B00000000000000000000002 /* TaskItem.swift */,
 				B00000000000000000000003 /* ArchiveHierarchy.swift */,
+				B00000000000000000000010 /* WatchItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -102,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000004 /* TaskStore.swift */,
+				B00000000000000000000011 /* WatchLaterStore.swift */,
+				B00000000000000000000012 /* BangumiClient.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -113,6 +128,8 @@
 				B00000000000000000000006 /* TaskBoardView.swift */,
 				B00000000000000000000007 /* TaskEditorView.swift */,
 				B00000000000000000000008 /* TaskBankView.swift */,
+				B00000000000000000000013 /* WatchLaterView.swift */,
+				B00000000000000000000014 /* WatchSearchView.swift */,
 				100000000000000000000006 /* Components */,
 			);
 			path = Views;
@@ -132,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				B0000000000000000000000D /* TaskStoreTests.swift */,
+				B00000000000000000000015 /* WatchLaterTests.swift */,
 			);
 			path = TaskTrackerTests;
 			sourceTree = "<group>";
@@ -256,6 +274,11 @@
 				A00000000000000000000009 /* AppTheme.swift in Sources */,
 				A0000000000000000000000A /* TaskTagView.swift in Sources */,
 				A0000000000000000000000B /* TaskCardView.swift in Sources */,
+				A00000000000000000000010 /* WatchItem.swift in Sources */,
+				A00000000000000000000011 /* WatchLaterStore.swift in Sources */,
+				A00000000000000000000012 /* BangumiClient.swift in Sources */,
+				A00000000000000000000013 /* WatchLaterView.swift in Sources */,
+				A00000000000000000000014 /* WatchSearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0000000000000000000000D /* TaskStoreTests.swift in Sources */,
+				A00000000000000000000015 /* WatchLaterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

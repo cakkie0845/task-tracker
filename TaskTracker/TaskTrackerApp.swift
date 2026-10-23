@@ -3,12 +3,14 @@ import SwiftUI
 @main
 struct TaskTrackerApp: App {
     @StateObject private var store = TaskStore()
+    @StateObject private var watchLaterStore = WatchLaterStore()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(store)
+                .environmentObject(watchLaterStore)
                 .onAppear {
                     store.startAutomaticDailyRefresh()
                 }
